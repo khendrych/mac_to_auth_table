@@ -45,49 +45,54 @@ Do your benchmark WRT interval, worst case SRX300 with old eUSB takes 60s to cre
     set event-options event-script file mac_to_auth-table.py python-script-user python-script-user
 ```
 # Common instructions for both op and event scripts:
-configure variables in CONFIGURATION SECTION 
+Configure variables in script CONFIGURATION section 
 
+**sets of IPv4 and IPv6 interfaces of interest**
 ```
-sets of IPv4 and IPv6 interfaces of interest
-
 v4_int = { 'ge-0/0/1.0', 'ge-0/0/2.11', 'ge-0/0/2.12', 'ge-0/0/2.13' }
 v6_int = { 'ge-0/0/1.0', 'ge-0/0/2.11', 'ge-0/0/2.14' }
 ```
 
+**TTL of SRX Auth-Table record in seconds, taken into account upon every ARP/ND flap, not extended with ARP/ND re-appearance**
 ```
-TTL of SRX Auth-Table record in seconds, taken into account upon every ARP/ND flap, not extended with ARP/ND re-appearance
 flapping_ttl = 3600
 ```
+
+**verbose soutput (stdout), useful in op script mode (unlike syslog dumps data structures), [0|1]**
 ```
-verbose soutput (stdout), useful in op script mode (unlike syslog dumps data structures), [0|1]
 debug = 0
 ```
+
+**user.info logging to SYSLOG, 0 to disable, 1 normal, 2 verbose (similar to debug=1)**
 ```
-user.info logging to SYSLOG, 0 to disable, 1 normal, 2 verbose (similar to debug=1)
 syslog = 1
 ```
+**enables use of aliases defined in mac_aliases dictionary, [0|1]**
 ```
-enables use of aliases defined in mac_aliases dictionary, [0|1]
 use_mac_aliases = 0
 ```
+
+**include MAC in alias pushed to auth table (alias__MAC), [0|1]**
 ```
-include MAC in alias pushed to auth table (alias__MAC), [0|1] 
 include_mac_in_alias = 0
 ```
-```
-dictionary with aliases for known MAC addresses, human friendly, remember to clear old Auth-Table records
+
+**dictionary with aliases for known MAC addresses, human friendly, remember to clear old Auth-Table records**
+
 mac_aliases = {
 '44:85:00:76:17:5e': 'HOST1',
 '52:54:00:d2:38:02': 'HOST2',
 '00:21:cc:b9:d5:c9': 'HOST3'
 }
 ```
+
+**enables manual auth-table records defined below, do not use for hosts directly connected to interfaces listed above [0|1]**
 ```
-enables manual auth-table records defined below, do not use for hosts directly connected to interfaces listed above [0|1]
 use_ip_users = 0
 ```
+
+**manual auth-table records dictionary, for tracking few IPs which are not directly connected**
 ```
-manual auth-table records dictionary, for tracking few IPs which are not directly connected
 ip_users = {
 '192.168.9.3': 'HOST1',
 '2a02:cbf0:8500:f::3': 'HOST1',
