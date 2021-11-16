@@ -20,7 +20,7 @@ RT_FLOW_SESSION_CLOSE [reason="TCP FIN" ...  application="SSH" ...  username="44
 ```
 
 
-# Test-drive instructions (on-demand op-script):
+## Test-drive instructions (on-demand op-script):
 place ```mac_to_auth-table.py``` to ```/var/db/scripts/op/```
 ```
     set system scripts op file mac_to_auth-table.py
@@ -31,7 +31,7 @@ Then
 > op mac_to_auth-table.py
 ```
 #
-# Operational instructions (periodic event script): 
+## Operational instructions (periodic event script): 
 
 place ```mac_to_auth-table.py``` to ```/var/db/scripts/event/```
 
@@ -44,7 +44,7 @@ Do your benchmark WRT interval, worst case SRX300 with old eUSB takes 60s to cre
     set event-options policy mac_to_auth-table then event-script mac_to_auth-table.py
     set event-options event-script file mac_to_auth-table.py python-script-user python-script-user
 ```
-# Common instructions for both op and event scripts:
+## Common instructions for both op and event scripts:
 Configure variables in script CONFIGURATION section 
 
 **sets of IPv4 and IPv6 interfaces of interest**
@@ -78,7 +78,7 @@ include_mac_in_alias = 0
 ```
 
 **dictionary with aliases for known MAC addresses, human friendly, remember to clear old Auth-Table records**
-
+```
 mac_aliases = {
 '44:85:00:76:17:5e': 'HOST1',
 '52:54:00:d2:38:02': 'HOST2',
@@ -101,7 +101,7 @@ ip_users = {
 }
 ```
 
-# Final Junos side configuration
+## Final Junos side configuration
 
 To avoid CSCRIPT_SECURITY_WARNING event log about unsigned script:
 
