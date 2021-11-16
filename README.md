@@ -5,7 +5,7 @@ Handy also for dual stacked scenarios where user-name (MAC) can be used to corre
 
 User authentication table records sample - two records for single dual-stacked computer where role is creation Unix timestamp:
 ```
-show security user-identification local-authentication-table user 44:85:00:76:17:5e
+> show security user-identification local-authentication-table user 44:85:00:76:17:5e
 Ip-address: 192.168.4.133
 Username: 44:85:00:78:17:5e
 Roles: 1630911747
